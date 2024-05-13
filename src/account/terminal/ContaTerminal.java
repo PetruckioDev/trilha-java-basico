@@ -5,12 +5,9 @@ import account.terminal.entity.Conta;
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ContaTerminal {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Logger logger = Logger.getLogger(ContaTerminal.class.getName());
 
     public static void main(String[] args) {
         run();
@@ -21,20 +18,20 @@ public class ContaTerminal {
 
         try {
 
-            logger.info("Por favor, digite o número da Conta:");
+            System.out.println("Por favor, digite o número da Conta:");
             int numero = Integer.parseInt(SCANNER.nextLine());
 
-            logger.info("Por favor, digite o número da Agência:");
+            System.out.println("Por favor, digite o número da Agência:");
             String agencia = SCANNER.nextLine();
 
-            logger.info("Por favor, digite o nome do cliente:");
+            System.out.println("Por favor, digite o nome do cliente:");
             String nomeCliente = SCANNER.nextLine().toUpperCase();
 
-            logger.info("Por favor, digite o saldo da numero:");
+            System.out.println("Por favor, digite o saldo da numero:");
             BigDecimal saldo = new BigDecimal(SCANNER.nextLine());
 
             if (!isValidInput(numero, agencia, nomeCliente, saldo)) {
-                logger.warning("Por favor, forneça entradas válidas!");
+                System.out.println("Por favor, forneça entradas válidas!");
                 return;
             }
 
@@ -44,10 +41,10 @@ public class ContaTerminal {
                     Sua agência é %s, conta %d e seu saldo é %.2f já está disponível para saque.
                     """.formatted(cliente.cliente(), cliente.agencia(), cliente.numero(), cliente.saldo());
 
-            logger.info(bemVindoNovoCliente);
+            System.out.println(bemVindoNovoCliente);
 
         } catch (NumberFormatException | InputMismatchException e) {
-            logger.log(Level.WARNING, "Por favor, forneça entradas válidas!", e);
+            System.out.println(e.getMessage());
         }
 
     }
